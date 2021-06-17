@@ -92,11 +92,11 @@ function transform(oldPoint) {
   	  for (const pointValue in oldPoint){  
         for (let j=0; j<oldPoint[pointValue].length;j++ ){
           let letter = oldPoint[pointValue][j].toLowerCase();
-          console.log(letter)
+        
           tempObj[letter] = Number(pointValue);
         }  
       }
-      console.log(tempObj)
+     
       return tempObj;
 };
 
