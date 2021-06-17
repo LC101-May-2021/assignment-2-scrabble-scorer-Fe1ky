@@ -59,7 +59,7 @@ return vowels+consonants;
 let scrabbleScore = function(word){
      let score = 0;
    for(let i=0; i<word.length;i++){
-     score = score +newPointStructure[word[i].toUpperCase()]
+     score = score +newPointStructure[word[i].toLowerCase()]
    }
    return score
 };
@@ -91,9 +91,12 @@ function transform(oldPoint) {
   let tempObj = {};
   	  for (const pointValue in oldPoint){  
         for (let j=0; j<oldPoint[pointValue].length;j++ ){
-          tempObj[oldPoint[pointValue][j]] = Number(pointValue);
+          let letter = oldPoint[pointValue][j].toLowerCase();
+          console.log(letter)
+          tempObj[letter] = Number(pointValue);
         }  
       }
+      console.log(tempObj)
       return tempObj;
 };
 
