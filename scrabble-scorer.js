@@ -72,12 +72,12 @@ const scoringAlgorithms = [
   },
   {
   'name':'Bonus Vowels',
-  'description':'	Vowels are 3 pts, consonants are 1 pt.',
+  'description':'Vowels are 3 pts, consonants are 1 pt.',
   'scoreFunction':vowelBonusScore
   },
   {
   'name':'Scrabble',
-  'description':'	The traditional scoring algorithm.',
+  'description':'The traditional scoring algorithm.',
   'scoreFunction':scrabbleScore
   }
   ];
@@ -91,12 +91,9 @@ function transform(oldPoint) {
   let tempObj = {};
   	  for (const pointValue in oldPoint){  
         for (let j=0; j<oldPoint[pointValue].length;j++ ){
-          let letter = oldPoint[pointValue][j].toLowerCase();
-        
-          tempObj[letter] = Number(pointValue);
+          tempObj[oldPoint[pointValue][j].toLowerCase()] = Number(pointValue);
         }  
       }
-     
       return tempObj;
 };
 
