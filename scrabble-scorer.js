@@ -26,34 +26,84 @@ function oldScrabbleScorer(word) {
  
 	  }
 	}
-	return letterPoints;
+return letterPoints
  }
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-   console.log("Let's play some scrabble! Enter a word:");
+   let word = input.question("Let's play some scrabble! \n\nEnter a word to score: ");
+  return word
 };
 
-let simpleScore;
+let simpleScore = function(word){
+ return word.length
+};
 
-let vowelBonusScore;
+let vowelBonusScore = function(word){
+  word = word.toUpperCase();
+  let vowels = 0;
+  let consonants = 0;
 
-let scrabbleScore;
+  for(let i = 0; i<word.length;i++){
+     if(word[i] == 'A'|| word[i] == 'E'||word[i] == 'I'||word[i] == 'O'||word[i] == 'U'){
+    vowels = vowels+3
+      } else {
+    consonants++
+      }
+    }
+return vowels+consonants;
+};
 
-const scoringAlgorithms = [];
+let scrabbleScore = function(word){
+     let score = 0;
+   for(let i=0; i<word.length;i++){
+     score = score +newPointStructure[word[i].toLowerCase()]
+   }
+   return score
+};
 
-function scorerPrompt() {}
+const scoringAlgorithms = [
+  {
+  'name':'Simple Score',
+  'description':'Each letter is worth 1 point.',
+  'scoringFunction': simpleScore
+  },
+  {
+  'name':'Bonus Vowels',
+  'description':'Vowels are 3 pts, consonants are 1 pt.',
+  'scoringFunction':vowelBonusScore
+  },
+  {
+  'name':'Scrabble',
+  'description':'The traditional scoring algorithm.',
+  'scoringFunction':scrabbleScore
+  }
+  ];
 
-function transform() {};
+function scorerPrompt(word) {
+     let scoringMethod = input.question("Which scoring algorithm would you like to use? \n \n 0 - Simple: One point per character \n 1 - Vowel Bonus: Vowels are worth 3 points \n 2 - Scrabble: Uses scrabble point system \n Enter 0, 1, or 2: ");
+  console.log(`Score for '${word}': ${scoringAlgorithms[scoringMethod]['scoringFunction'](word)}`);
+}
 
-let newPointStructure;
+function transform(oldPoint) {
+  let tempObj = {};
+  	  for (const pointValue in oldPoint){  
+        for (let j=0; j<oldPoint[pointValue].length;j++ ){
+          tempObj[oldPoint[pointValue][j].toLowerCase()] = Number(pointValue);
+        }  
+      }
+      return tempObj;
+};
+
+let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
-   initialPrompt();
-   
+let word = initialPrompt();
+scorerPrompt(word);   
 }
+
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
